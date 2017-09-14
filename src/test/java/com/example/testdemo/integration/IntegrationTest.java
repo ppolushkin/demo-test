@@ -1,5 +1,6 @@
-package com.example.testdemo;
+package com.example.testdemo.integration;
 
+import com.example.testdemo.User;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,14 +24,16 @@ public class IntegrationTest {
     @Autowired
     private TestRestTemplate restTemplate;
 
-
     @Test
-    public void testGetAll() throws Exception {
+    public void testDelete() throws Exception {
         User[] users = restTemplate.getForEntity("http://localhost:{port}/users/", User[].class, port).getBody();
-        Assert.assertNotNull(users);
         Assert.assertEquals(2, users.length);
-    }
 
+        restTemplate.delete("http://localhost:{port}/users/{userId}", port, 1);
+
+        users = restTemplate.getForEntity("http://localhost:{port}/users/", User[].class, port).getBody();
+        Assert.assertEquals(1, users.length);
+    }
 
 
 }
