@@ -12,6 +12,9 @@ public class User {
     public String birthday;
     public String jobTitle;
 
+    public User() {
+    }
+
     public User(Long id, String firstName, String lastName, String birthday, String jobTitle) {
         this.id = id;
         this.firstName = firstName;

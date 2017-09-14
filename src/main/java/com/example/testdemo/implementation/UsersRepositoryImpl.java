@@ -1,5 +1,6 @@
 package com.example.testdemo.implementation;
 
+import com.example.testdemo.NotFoundException;
 import com.example.testdemo.User;
 import com.example.testdemo.UsersRepository;
 import org.springframework.stereotype.Repository;
@@ -28,7 +29,7 @@ public class UsersRepositoryImpl implements UsersRepository {
 
     @Override
     public User getById(long id) {
-        return users.stream().filter(user -> user.id == id).findAny().orElseThrow(() -> new RuntimeException("Not found"));
+        return users.stream().filter(user -> user.id == id).findAny().orElseThrow(NotFoundException::new);
     }
 
     @Override
